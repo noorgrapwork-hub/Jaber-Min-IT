@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jaber Min IT</title>
+<style>
+:root{--bg:#121212;--side:#181818;--panel:#181818;--card:#222;--text:#ececec;--muted:#9a9a9a;--line:#2e2e2e;--accent:#7aa2ff;--accentText:#0b1330;--bot:#222;--user:#2b3a67;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fafafa;--side:#f2f2f0;--panel:#f2f2f0;--card:#fff;--text:#1d1d1d;--muted:#6c6c6c;--line:#e2e2de;--accent:#2f5fe0;--accentText:#fff;--bot:#f0f0ed;--user:#dfe8ff}}
+:root[data-theme="light"]{--bg:#fafafa;--side:#f2f2f0;--panel:#f2f2f0;--card:#fff;--text:#1d1d1d;--muted:#6c6c6c;--line:#e2e2de;--accent:#2f5fe0;--accentText:#fff;--bot:#f0f0ed;--user:#dfe8ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;height:100%;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI","Noto Sans Bengali",sans-serif}
+.app{display:grid;grid-template-columns:230px 1fr 290px;height:100%}
+aside{background:var(--side);border-right:1px solid var(--line);padding:16px 12px;overflow-y:auto}
+aside.r{border-right:0;border-left:1px solid var(--line);background:var(--panel)}
+.logo{font-weight:700;font-size:1.05rem;margin:0 6px 18px}
+.logo span{color:var(--accent)}
+.nav{display:block;width:100%;text-align:left;background:none;border:0;color:var(--text);padding:8px 10px;border-radius:10px;font:inherit;cursor:pointer}
+.nav:hover,.nav.on{background:var(--card)}
+.sec{color:var(--muted);font-size:.72rem;letter-spacing:.08em;margin:18px 10px 6px;text-transform:uppercase}
+#hist .nav{font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m.wide{background:none;padding:0;width:100%;max-width:100%}.wide img{max-width:min(460px,100%)!important;border-radius:20px!important}.mk{display:flex;gap:8px;align-items:center;color:var(--text)}.sp{display:inline-block;color:var(--accent);animation:pulse 1.2s infinite ease-in-out}@keyframes pulse{50%{opacity:.25;transform:scale(.7)}}.sk{width:min(460px,100%);aspect-ratio:4/3;margin-top:12px;border-radius:20px;background:linear-gradient(100deg,var(--card) 30%,var(--line) 50%,var(--card) 70%);background-size:300% 100%;animation:sh 1.5s infinite linear}@keyframes sh{0%{background-position:100% 0}100%{background-position:0 0}}
+.hrow{display:flex;align-items:center}.hrow .nav{flex:1;min-width:0}.del{background:none;border:0;color:var(--muted);cursor:pointer;padding:6px 8px;border-radius:8px;opacity:0;font-size:.8rem}.hrow:hover .del{opacity:1}.del:hover{color:#ff6b6b;background:var(--card)}@media (hover:none){.del{opacity:1}}
+main{display:flex;flex-direction:column;min-width:0;height:100%}
+header{padding:14px 20px;border-bottom:1px solid var(--line);font-weight:600}
+#chat{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.m{max-width:80%;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}
+.u{align-self:flex-end;background:var(--user)}
+.b{align-self:flex-start;background:var(--bot)}
+.empty{margin:auto;text-align:center;color:var(--muted)}
+.empty h2{color:var(--text);margin:0 0 6px;font-size:1.4rem}
+.bar{padding:12px 20px 18px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;gap:10px;align-items:flex-end}
+.box textarea{flex:1;background:none;border:0;color:var(--text);font:inherit;resize:none;max-height:140px;min-height:24px;outline:0}
+button.run{background:var(--accent);color:var(--accentText);border:0;border-radius:10px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+button.run:disabled{opacity:.5}
+.hint{color:var(--muted);font-size:.78rem;margin-top:6px;min-height:1em}
+.f{margin-bottom:18px}
+.f label{display:block;font-weight:600;margin-bottom:6px;font-size:.9rem}
+.f textarea,.f select{width:100%;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px;font:inherit;font-size:.86rem}
+.f textarea{min-height:200px;resize:vertical}
+.f small{color:var(--muted);display:block;margin-top:4px}
+@media (max-width:900px){
+ .app{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:100%}
+ aside:not(.r){display:none}
+ aside.r{order:-1;border-left:0;border-bottom:1px solid var(--line);padding:8px 14px;max-height:45%}
+ aside.r h3{display:none}
+ .f textarea{min-height:90px}
+ .m{max-width:92%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+ <div class="logo">✦ Jaber <span>Min IT</span></div>
+ <button class="nav on" id="new">＋ New chat</button>
+ <div class="sec">History</div>
+ <div id="hist"></div>
+</aside>
+<main>
+ <header>Playground</header>
+ <div id="chat"></div>
+ <div class="bar">
+  <div class="box"><textarea id="msg" rows="1" placeholder="Start typing a prompt…"></textarea><button class="run" id="run">Run ⌃↵</button></div>
+  <div class="hint" id="hint"></div>
+ </div>
+</main>
+<aside class="r">
+ <h3 style="margin:2px 0 14px;font-size:.95rem">Run settings</h3>
+ <div class="f"><label for="sys">System instructions</label>
+ <textarea id="sys">Tumi "Jaber" — Jaber Min IT-r ekti adunik, friendly AI sohokari. Keu tomar naam jiggesh korle bolo tumi Jaber.
+- User jei bhashay likhbe (Bangla, Banglish, English), sei bhashay uttor dao.
+- Choto, poriskar, kaje-lagar moto uttor dao.
+- Na janle sotti bolo, ondaje uttor banio na.</textarea>
+ <small>AI-r personality ekhane lekho.</small></div>
+ <div class="f"><label for="lvl">Thinking level</label>
+ <select id="lvl"><option value="quick">Low (druto)</option><option value="default" selected>Medium</option><option value="complex">High (gobhir)</option></select></div>
+</aside>
+</div>
+
+<script>
+(function(){
+ var chat=document.getElementById('chat'),msg=document.getElementById('msg'),run=document.getElementById('run'),
+  sys=document.getElementById('sys'),lvl=document.getElementById('lvl'),hint=document.getElementById('hint'),
+  histEl=document.getElementById('hist'),newBtn=document.getElementById('new');
+ var sample=null,busy=false,hist=[],chats=[],cur=null;var IMG='If the user asks for a picture, image, photo, logo or drawing, you cannot make photos, but you CAN draw: reply with one short caption line, then ONE complete, colorful, detailed SVG illustration (viewBox 0 0 400 300, xmlns included, no scripts, no external images) inside a ```svg code block. Never say you cannot make images.';
+ claude.use('sample').then(function(s){sample=s;if(!s)hint.textContent='Ei view-te AI chalu nai. Claude-e page-ta khule dekho.';}).catch(function(){});
+
+ function load(){try{chats=JSON.parse(localStorage.getItem('chats')||'[]')}catch(e){chats=[]}}
+ function save(){try{localStorage.setItem('chats',JSON.stringify(chats.slice(0,30)))}catch(e){}}
+ function renderHist(){
+  histEl.innerHTML='';
+  chats.forEach(function(c){
+   var w=document.createElement('div');w.className='hrow';var b=document.createElement('button');b.className='nav';b.textContent=c.title;
+   b.onclick=function(){cur=c.id;hist=c.msgs.slice();sys.value=c.sys;draw();};
+   var x=document.createElement('button');x.className='del';x.textContent='✕';x.title='Delete';x.onclick=function(e){e.stopPropagation();chats=chats.filter(function(k){return k.id!==c.id});if(cur===c.id){cur=null;hist=[];draw();}save();renderHist();};w.appendChild(b);w.appendChild(x);histEl.appendChild(w);
+  });
+ }
+ function empty(){chat.innerHTML='<div class="empty"><h2>✦ Hello</h2>Niche kichu likhe Run chap</div>';}
+ function mk(el){if(el.dataset.mk)return;el.dataset.mk='1';el.classList.add('wide');el.innerHTML='<div class="mk"><span class="sp">✦</span> Creating your image</div><div class="sk"></div>';}function show(d,t){var m=String(t).match(/<svg[\s\S]*?<\/svg>/i);if(!m){d.textContent=t;return;}var s=m[0];d.classList.add('wide');if(!/xmlns=/i.test(s))s=s.replace(/<svg/i,'<svg xmlns="http://www.w3.org/2000/svg"');d.textContent=String(t).replace(/```[a-z]*\s*<svg[\s\S]*?<\/svg>\s*```/i,'').replace(m[0],'').trim();var i=document.createElement('img');i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);i.style.cssText='display:block;max-width:100%;border-radius:10px;margin-top:8px;background:#fff';d.appendChild(i);}function add(role,text){
+  var e=chat.querySelector('.empty');if(e)chat.innerHTML='';
+  var d=document.createElement('div');d.className='m '+(role==='user'?'u':'b');show(d,text);
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d;
+ }
+ function draw(){chat.innerHTML='';if(!hist.length)empty();hist.forEach(function(m){add(m.role,m.content)});}
+ function persist(){
+  if(!hist.length)return;
+  var c=chats.find(function(x){return x.id===cur});
+  if(!c){cur=Date.now();c={id:cur,title:hist[0].content.slice(0,40)};chats.unshift(c);}
+  c.msgs=hist.slice();c.sys=sys.value;save();renderHist();
+ }
+ function build(){
+  var m=hist.map(function(x){return{role:x.role,content:x.content}});
+  m[0]={role:'user',content:'[SYSTEM INSTRUCTIONS — follow strictly]\n'+sys.value+'\n'+IMG+'\n[END]\n\nUser:\n'+hist[0].content};
+  return m;
+ }
+ async function go(){
+  var t=msg.value.trim();if(!t||busy)return;
+  if(!sample){hint.textContent='AI available na.';return;}
+  busy=true;run.disabled=true;msg.value='';hint.textContent='';
+  hist.push({role:'user',content:t});add('user',t);
+  var el=add('bot','…');
+  try{
+   var r=await sample(build(),{cache:false,modelTier:lvl.value,onText:function(x){if(/<svg|```svg/i.test(x.text)){mk(el);}else{el.textContent=x.text;}chat.scrollTop=chat.scrollHeight;}});
+   show(el,r.text);hist.push({role:'assistant',content:r.text});persist();
+  }catch(e){
+   hist.pop();el.textContent='⚠️ '+((e&&e.message)||'Error');
+   if(e&&e.code==='rate_limited')hint.textContent='Ektu opekkha koro.';
+  }
+  busy=false;run.disabled=false;msg.focus();
+ }
+ run.onclick=go;
+ msg.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey||!e.shiftKey)){e.preventDefault();go();}});
+ msg.addEventListener('input',function(){msg.style.height='auto';msg.style.height=msg.scrollHeight+'px';});
+ newBtn.onclick=function(){cur=null;hist=[];draw();};
+ load();renderHist();empty();
+})();
+</script>
+</body>
+</html>
